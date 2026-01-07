@@ -1,48 +1,58 @@
-'use client';
+"use client";
 
-import { Typography, Row, Col, Card, Form, Input, Button, Space, message } from 'antd';
+import { Typography, Row, Col, Card, Space } from "antd";
 import {
   PhoneOutlined,
   MailOutlined,
   EnvironmentOutlined,
   ClockCircleOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
+import { useEffect } from "react";
+import Link from "next/link";
 
 const { Title, Paragraph, Text } = Typography;
-const { TextArea } = Input;
 
 export default function Contact() {
-  const [form] = Form.useForm();
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-  const onFinish = (values: any) => {
-    message.success('Thank you for contacting us! We will get back to you soon.');
-    form.resetFields();
-  };
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((reveal) => observer.observe(reveal));
+
+    return () => {
+      reveals.forEach((reveal) => observer.unobserve(reveal));
+    };
+  }, []);
 
   const contactInfo = [
     {
-      icon: <PhoneOutlined style={{ fontSize: 32, color: '#1890ff' }} />,
-      title: 'Phone',
-      content: '+92 300 1234567',
-      extra: '+92 321 9876543',
+      icon: <PhoneOutlined style={{ fontSize: 32, color: "#1890ff" }} />,
+      title: "Phone",
+      content: "+92 308 6644973",
+      extra: "+92 333 4241841",
+    },
+
+    {
+      icon: <EnvironmentOutlined style={{ fontSize: 32, color: "#1890ff" }} />,
+      title: "Address",
+      content: "Service Ln, Gulshan Colony, Lahore",
+      extra: "Lahore, Pakistan",
+      link: "https://www.google.com/maps/place/Nazir+Builders/@31.4665445,74.3468712,17z/data=!3m1!4b1!4m6!3m5!1s0x391907cd2eca0f79:0x4335ee4f124c96eb!8m2!3d31.4665445!4d74.3468712!16s%2Fg%2F11ghpxvzz9?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D",
     },
     {
-      icon: <MailOutlined style={{ fontSize: 32, color: '#1890ff' }} />,
-      title: 'Email',
-      content: 'info@nazirbuilders.com',
-      extra: 'sales@nazirbuilders.com',
-    },
-    {
-      icon: <EnvironmentOutlined style={{ fontSize: 32, color: '#1890ff' }} />,
-      title: 'Address',
-      content: '123 Business District',
-      extra: 'Lahore, Pakistan',
-    },
-    {
-      icon: <ClockCircleOutlined style={{ fontSize: 32, color: '#1890ff' }} />,
-      title: 'Working Hours',
-      content: 'Monday - Saturday',
-      extra: '8:00 AM - 6:00 PM',
+      icon: <ClockCircleOutlined style={{ fontSize: 32, color: "#1890ff" }} />,
+      title: "Working Hours",
+      content: "Monday - Saturday",
+      extra: "8:00 AM - 6:00 PM",
     },
   ];
 
@@ -50,8 +60,26 @@ export default function Contact() {
     <div className="contact-page">
       <section className="page-header">
         <div className="container">
-          <Title level={1} style={{ color: 'white', margin: 0 }}>Contact Us</Title>
-          <Paragraph style={{ color: 'white', fontSize: 18, margin: '16px 0 0' }}>
+          <Title
+            level={1}
+            style={{
+              color: "white",
+              margin: 0,
+              fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
+            }}
+          >
+            Contact Us
+          </Title>
+          <Paragraph
+            style={{
+              color: "rgba(255,255,255,0.95)",
+              fontSize: 18,
+              margin: "16px 0 0",
+              maxWidth: 700,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
             Get in touch with us for any inquiries or quotes
           </Paragraph>
         </div>
@@ -60,112 +88,111 @@ export default function Contact() {
       <section className="content-section">
         <div className="container">
           <Row gutter={[48, 48]}>
-            <Col xs={24} lg={12}>
-              <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                <div>
-                  <Title level={2}>Send Us a Message</Title>
-                  <Paragraph style={{ fontSize: 16, color: '#666' }}>
-                    Fill out the form below and our team will get back to you within 24 hours.
-                    For urgent matters, please call us directly.
-                  </Paragraph>
-                </div>
-
-                <Card>
-                  <Form
-                    form={form}
-                    layout="vertical"
-                    onFinish={onFinish}
-                    autoComplete="off"
-                  >
-                    <Row gutter={16}>
-                      <Col xs={24} sm={12}>
-                        <Form.Item
-                          label="First Name"
-                          name="firstName"
-                          rules={[{ required: true, message: 'Please enter your first name' }]}
-                        >
-                          <Input size="large" placeholder="John" />
-                        </Form.Item>
-                      </Col>
-                      <Col xs={24} sm={12}>
-                        <Form.Item
-                          label="Last Name"
-                          name="lastName"
-                          rules={[{ required: true, message: 'Please enter your last name' }]}
-                        >
-                          <Input size="large" placeholder="Doe" />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-
-                    <Form.Item
-                      label="Email"
-                      name="email"
-                      rules={[
-                        { required: true, message: 'Please enter your email' },
-                        { type: 'email', message: 'Please enter a valid email' },
-                      ]}
-                    >
-                      <Input size="large" placeholder="john.doe@example.com" />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="Phone Number"
-                      name="phone"
-                      rules={[{ required: true, message: 'Please enter your phone number' }]}
-                    >
-                      <Input size="large" placeholder="+92 300 1234567" />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="Subject"
-                      name="subject"
-                      rules={[{ required: true, message: 'Please enter a subject' }]}
-                    >
-                      <Input size="large" placeholder="Project Inquiry" />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="Message"
-                      name="message"
-                      rules={[{ required: true, message: 'Please enter your message' }]}
-                    >
-                      <TextArea
-                        rows={6}
-                        placeholder="Tell us about your project requirements..."
-                      />
-                    </Form.Item>
-
-                    <Form.Item>
-                      <Button type="primary" htmlType="submit" size="large" block>
-                        Send Message
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                </Card>
-              </Space>
-            </Col>
-
-            <Col xs={24} lg={12}>
-              <Space direction="vertical" size="large" style={{ width: '100%' }}>
-                <div>
-                  <Title level={2}>Contact Information</Title>
-                  <Paragraph style={{ fontSize: 16, color: '#666' }}>
-                    Reach out to us through any of the following channels. We're here to help
-                    you with your construction needs.
-                  </Paragraph>
-                </div>
-
+            <Col xs={24}>
+              <Space
+                direction="vertical"
+                size="small"
+                style={{ width: "100%" }}
+              >
                 <Row gutter={[24, 24]}>
                   {contactInfo.map((info, index) => (
                     <Col xs={24} sm={12} key={index}>
-                      <Card className="contact-info-card" hoverable>
-                        <Space direction="vertical" size="middle" align="center" style={{ width: '100%', textAlign: 'center' }}>
-                          {info.icon}
+                      <Card
+                        className={`contact-info-card reveal delay-${
+                          (index + 2) * 100
+                        }`}
+                        hoverable
+                        style={{
+                          borderRadius: "16px",
+                          border: "1px solid #f0f0f0",
+                        }}
+                      >
+                        <Space
+                          direction="vertical"
+                          size="middle"
+                          align="center"
+                          style={{
+                            width: "100%",
+                            textAlign: "center",
+                            padding: "8px 0",
+                          }}
+                        >
+                          <div
+                            style={{
+                              padding: "16px",
+                              background:
+                                "linear-gradient(135deg, #f0f5ff, #e6f4ff)",
+                              borderRadius: "50%",
+                              display: "inline-block",
+                            }}
+                          >
+                            {info.icon}
+                          </div>
                           <div>
-                            <Title level={5} style={{ margin: '8px 0' }}>{info.title}</Title>
-                            <Text style={{ display: 'block', color: '#666' }}>{info.content}</Text>
-                            <Text style={{ display: 'block', color: '#666' }}>{info.extra}</Text>
+                            <Title
+                              level={5}
+                              style={{ margin: "8px 0", fontSize: "1.1rem" }}
+                            >
+                              {info.title}
+                            </Title>
+                            {info.link ? (
+                              <Link
+                                href={info.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                  textDecoration: "none",
+                                  color: "inherit",
+                                  transition: "all 0.3s ease",
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.color = "#1890ff";
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.color = "#666";
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    display: "block",
+                                    color: "inherit",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  {info.content}
+                                </Text>
+                                <Text
+                                  style={{
+                                    display: "block",
+                                    color: "inherit",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  {info.extra} 📍
+                                </Text>
+                              </Link>
+                            ) : (
+                              <>
+                                <Text
+                                  style={{
+                                    display: "block",
+                                    color: "#666",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  {info.content}
+                                </Text>
+                                <Text
+                                  style={{
+                                    display: "block",
+                                    color: "#666",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  {info.extra}
+                                </Text>
+                              </>
+                            )}
                           </div>
                         </Space>
                       </Card>
@@ -174,68 +201,90 @@ export default function Contact() {
                 </Row>
 
                 <Card
+                  className="reveal delay-600"
                   style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    border: 'none',
+                    background:
+                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    border: "none",
                     marginTop: 24,
+                    borderRadius: "16px",
+                    position: "relative",
+                    overflow: "hidden",
                   }}
                 >
-                  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-                    <Title level={4} style={{ color: 'white', margin: 0 }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "-50%",
+                      right: "-50%",
+                      width: "200%",
+                      height: "200%",
+                      background:
+                        "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                      animation: "float 6s ease-in-out infinite",
+                    }}
+                  />
+                  <Space
+                    direction="vertical"
+                    size="middle"
+                    style={{ width: "100%", position: "relative", zIndex: 2 }}
+                  >
+                    <Title level={4} style={{ color: "white", margin: 0 }}>
                       Visit Our Office
                     </Title>
-                    <Paragraph style={{ color: 'white', margin: 0, fontSize: 15 }}>
-                      We welcome site visits and consultations at our office. Please call ahead
-                      to schedule an appointment with our team.
+                    <Paragraph
+                      style={{
+                        color: "rgba(255,255,255,0.95)",
+                        margin: 0,
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      We welcome site visits and consultations at our office.
+                      Please call ahead to schedule an appointment with our
+                      team.
                     </Paragraph>
-                    <div style={{
-                      background: 'rgba(255,255,255,0.2)',
-                      padding: 20,
-                      borderRadius: 8,
-                      marginTop: 16,
-                    }}>
-                      <Text style={{ color: 'white', fontSize: 15 }}>
-                        <EnvironmentOutlined /> 123 Business District, Lahore, Pakistan
-                      </Text>
-                    </div>
-                  </Space>
-                </Card>
-
-                <Card style={{ background: '#f0f2f5', border: 'none' }}>
-                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
-                    <Title level={5} style={{ margin: 0 }}>Quick Response Guarantee</Title>
-                    <Paragraph style={{ margin: '8px 0 0', color: '#666' }}>
-                      We pride ourselves on quick response times. All inquiries submitted through
-                      our contact form are answered within 24 hours on business days.
-                    </Paragraph>
+                    <Link
+                      href="https://www.google.com/maps/place/Nazir+Builders/@31.4665445,74.3468712,17z/data=!3m1!4b1!4m6!3m5!1s0x391907cd2eca0f79:0x4335ee4f124c96eb!8m2!3d31.4665445!4d74.3468712!16s%2Fg%2F11ghpxvzz9?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        display: "block",
+                      }}
+                    >
+                      <div
+                        style={{
+                          background: "rgba(255,255,255,0.15)",
+                          padding: 20,
+                          borderRadius: 12,
+                          marginTop: 16,
+                          backdropFilter: "blur(10px)",
+                          cursor: "pointer",
+                          transition: "all 0.3s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(255,255,255,0.25)";
+                          e.currentTarget.style.transform = "scale(1.02)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(255,255,255,0.15)";
+                          e.currentTarget.style.transform = "scale(1)";
+                        }}
+                      >
+                        <Text style={{ color: "white", fontSize: 15 }}>
+                          <EnvironmentOutlined /> Service Ln, Gulshan Colony,
+                          Lahore📍
+                        </Text>
+                      </div>
+                    </Link>
                   </Space>
                 </Card>
               </Space>
             </Col>
           </Row>
-        </div>
-      </section>
-
-      <section className="map-section">
-        <div className="container">
-          <Card>
-            <div style={{
-              height: 400,
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 8,
-            }}>
-              <Space direction="vertical" align="center">
-                <EnvironmentOutlined style={{ fontSize: 64, color: 'white' }} />
-                <Title level={3} style={{ color: 'white', margin: 0 }}>
-                  Location Map
-                </Title>
-                <Text style={{ color: 'white' }}>123 Business District, Lahore, Pakistan</Text>
-              </Space>
-            </div>
-          </Card>
         </div>
       </section>
     </div>
