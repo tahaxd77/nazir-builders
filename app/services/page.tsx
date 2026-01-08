@@ -47,7 +47,7 @@ export default function Services() {
         "Various grades available (PSI 2500-6000)",
         "Consistent quality and strength",
         "On-time delivery to site",
-        "Customized mix designs",
+        "Warrantied products"
       ],
     },
     {
@@ -62,32 +62,7 @@ export default function Services() {
         "Eco-friendly production",
       ],
     },
-    {
-      icon: <ToolOutlined style={{ fontSize: 64, color: "#1890ff" }} />,
-      title: "Construction Materials",
-      description:
-        "Complete range of construction materials and building supplies",
-      features: [
-        "Cement and aggregates",
-        "Steel and reinforcement bars",
-        "Waterproofing materials",
-        "Finishing materials",
-      ],
-    },
-    {
-      icon: (
-        <SafetyCertificateOutlined style={{ fontSize: 64, color: "#1890ff" }} />
-      ),
-      title: "Quality Testing",
-      description:
-        "Comprehensive quality control and material testing services",
-      features: [
-        "Laboratory testing facilities",
-        "Compliance certifications",
-        "Quality assurance reports",
-        "Technical documentation",
-      ],
-    },
+    
     {
       icon: <TruckOutlined style={{ fontSize: 64, color: "#1890ff" }} />,
       title: "Delivery Services",
@@ -95,7 +70,6 @@ export default function Services() {
         "Efficient logistics and on-time delivery to construction sites",
       features: [
         "Fleet of modern trucks",
-        "GPS-tracked deliveries",
         "Flexible scheduling",
         "Regional coverage",
       ],
@@ -117,7 +91,6 @@ export default function Services() {
 
   const additionalServices = [
     "Site surveys and material quantity estimation",
-    "Concrete pumping services",
     "Specialized concrete for unique applications",
     "Emergency orders and rush deliveries",
     "Bulk supply contracts for large projects",
@@ -171,10 +144,7 @@ export default function Services() {
                 lineHeight: 1.8,
               }}
             >
-              From premium concrete products to complete construction materials,
-              we provide everything you need to build with confidence. Our
-              services are designed to meet the diverse needs of modern
-              construction projects.
+              We provide premium quality concrete products manufactured by Izhar Concrete Pvt Ltd.
             </Paragraph>
           </div>
 
@@ -414,8 +384,8 @@ export default function Services() {
               },
               {
                 step: "03",
-                title: "Production",
-                desc: "Quality-controlled manufacturing of materials",
+                title: "Processing and Dispatchment",
+                desc: "Order processing and dispatchment from the warehouse",
               },
               {
                 step: "04",

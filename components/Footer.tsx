@@ -6,6 +6,7 @@ import {
   MailOutlined,
   EnvironmentOutlined,
   HeartFilled,
+  WhatsAppOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 
@@ -110,16 +111,7 @@ export default function Footer() {
                     fontSize: "14px",
                   }}
                 >
-                  Concrete Supply
-                </Text>
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,0.8)",
-                    display: "block",
-                    fontSize: "14px",
-                  }}
-                >
-                  Construction Materials
+                  Concrete Products
                 </Text>
                 <Text
                   style={{
@@ -160,22 +152,33 @@ export default function Footer() {
                   <Text
                     style={{ color: "rgba(255,255,255,0.8)", fontSize: "14px" }}
                   >
-                    +92 300 1234567
+                    +92 333 4241841
                   </Text>
                 </Space>
                 <Space style={{ alignItems: "flex-start" }}>
-                  <MailOutlined
-                    style={{ color: "#667eea", fontSize: 16, marginTop: 2 }}
+                  <WhatsAppOutlined
+                    style={{ color: "#25D366", fontSize: 16, marginTop: 2 }}
                   />
-                  <Text
+                  <Link
+                    href="https://wa.me/923086644973"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                      color: "rgba(255,255,255,0.8)",
-                      fontSize: "14px",
-                      wordBreak: "break-word",
+                      textDecoration: "none",
+                      transition: "all 0.3s ease",
                     }}
                   >
-                    info@nazirbuilders.com
-                  </Text>
+                    <Text
+                      style={{
+                        color: "rgba(255,255,255,0.8)",
+                        fontSize: "14px",
+                        transition: "all 0.3s ease",
+                      }}
+                      className="whatsapp-link"
+                    >
+                      +92 308 6644973
+                    </Text>
+                  </Link>
                 </Space>
                 <Space align="start" style={{ alignItems: "flex-start" }}>
                   <EnvironmentOutlined
@@ -215,7 +218,7 @@ export default function Footer() {
               marginBottom: 8,
             }}
           >
-            © 2025 Nazir Builders. All rights reserved.
+            © 2026 Nazir Builders. All rights reserved.
           </Text>
           <Text
             style={{
@@ -230,6 +233,12 @@ export default function Footer() {
           </Text>
         </div>
       </div>
+
+      <style jsx global>{`
+        .whatsapp-link:hover {
+          color: #25d366 !important;
+        }
+      `}</style>
     </AntFooter>
   );
 }
